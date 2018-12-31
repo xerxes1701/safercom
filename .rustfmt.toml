@@ -1,0 +1,10 @@
+unstable_features = true
+fn_args_density = "Vertical"
+imports_layout = "Vertical"
+merge_imports = true
+enum_discrim_align_threshold = 30
+format_strings = true
+match_block_trailing_comma = true
+max_width = 100
+struct_field_align_threshold = 30
+use_field_init_shorthand = true
