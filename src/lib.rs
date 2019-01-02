@@ -49,14 +49,44 @@ impl ComInterface for IUnknown {
     }
 }
 
-mod types {
+#[repr(C)]
+pub struct IDispatch {
+    __vtable: *mut IDispatch_vtable,
+}
+
+#[allow(non_snake_case)]
+#[repr(C)]
+pub struct IDispatch_vtable {
+    __iunknown:       <IUnknown as ComInterface>::VTable,
+    GetTypeInfoCount: *mut c_void, //extern "stdcall" fn(ComPtr, *mut u32) -> HRESULT,
+    GetTypeInfo:      *mut c_void, //extern "stdcall" fn(ComPtr, u32, LCID, *mut *mut ITypeInfo) -> HRESULT,
+    GetIDsOfNames:    *mut c_void, //extern "stdcall" fn(ComPtr, REFIID, *mut BSTR, u32, LCID, *mut DISPID) -> HRESULT,
+    Invoke:           *mut c_void, //extern "stdcall" fn(ComPtr, DISPID, REFIID, LCID, WORD, *mut DISPPARAMS, *mut VARIANT, *mut EXCEPINFO, *mut u32) -> HRESULT,
+}
+
+impl ComInterface for IDispatch {
+    type VTable = IDispatch_vtable;
+
+    const IID: IID = IID::new(
+        0x00020400,
+        0x0000,
+        0x0000,
+        [0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46],
+    );
+
+    unsafe fn vtable(&self) -> *const Self::VTable {
+        self.__vtable
+    }
+}
+
+pub mod types {
 
     #[derive(Clone, Debug, PartialEq, Eq, Copy)]
-    #[repr(C)]
+    #[repr(transparent)]
     pub struct DWORD(pub u32);
 
     #[derive(Clone, Debug, PartialEq, Eq, Copy)]
-    #[repr(C)]
+    #[repr(transparent)]
     pub struct HRESULT(pub u32);
 
     impl HRESULT {
@@ -64,7 +94,7 @@ mod types {
     }
 
     #[derive(Clone, Debug, PartialEq, Eq)]
-    #[repr(C)]
+    #[repr(transparent)]
     pub struct IID(pub GUID);
 
     impl IID {
@@ -84,7 +114,7 @@ mod types {
     }
 
     #[derive(Clone, Debug, PartialEq, Eq)]
-    #[repr(C)]
+    #[repr(transparent)]
     pub struct CLSID(pub GUID);
 
     impl CLSID {
