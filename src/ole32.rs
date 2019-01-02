@@ -1,5 +1,3 @@
-    #![allow(dead_code)]
-
 use crate::{
     types::{
         CLSID,
@@ -35,7 +33,7 @@ pub fn co_uninitialize() {
 pub fn co_create_instance<T: ComInterface>(clsid: &CLSID) -> Result<ComRef<T>, HRESULT> {
     unsafe {
         let ptr: *mut T = null_mut();
-        
+
         match native::CoCreateInstance(
             clsid,
             null_mut(),
@@ -49,7 +47,7 @@ pub fn co_create_instance<T: ComInterface>(clsid: &CLSID) -> Result<ComRef<T>, H
     }
 }
 
-mod native {
+pub mod native {
 
     use super::*;
 
