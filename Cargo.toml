@@ -1,5 +1,5 @@
 [package]
-name = "cio-rs"
+name = "safercom"
 version = "0.1.0"
 authors = ["Michael Gawlik <michaelgawlik1983@gmail.com>"]
 edition = "2018"
