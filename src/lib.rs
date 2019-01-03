@@ -3,6 +3,7 @@ pub mod ole32;
 use crate::types::{
     HRESULT,
     IID,
+    CLSID,
 };
 use std::{
     ops::Deref,
@@ -147,6 +148,11 @@ pub trait ComInterface {
     const IID: IID;
     type VTable;
     unsafe fn vtable(&self) -> *const Self::VTable;
+}
+
+pub trait ComClass {
+    const CLSID: CLSID;
+    type ClassInterface: ComInterface;
 }
 
 pub struct ComRef<T: ComInterface> {

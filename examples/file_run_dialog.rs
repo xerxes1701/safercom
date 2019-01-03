@@ -2,9 +2,7 @@ extern crate safercom;
 
 use safercom::{
     ole32::{
-        co_create_instance,
-        co_initialize,
-        co_uninitialize,
+        ComServer,
     },
     types::{
         CLSID,
@@ -12,7 +10,7 @@ use safercom::{
         IID,
     },
     ComInterface,
-    ComRef,
+    ComClass,
     IDispatch
 };
 use std::{
@@ -21,22 +19,29 @@ use std::{
 };
 
 fn main() -> Result<(), HRESULT> {
-    const CLSID_SH_APP: CLSID = CLSID::new(
+
+    let com = ComServer::initialize()?;
+
+    let shell_app = com.create_instance::<SH_APP>()?;
+
+    shell_app.file_run()?;
+
+    Ok(())
+}
+
+#[allow(non_camel_case_types)]
+pub struct SH_APP;
+
+impl ComClass for SH_APP{
+
+    type ClassInterface = IShellDispatch;
+
+    const CLSID: CLSID = CLSID::new(
         0x13709620,
         0xC279,
         0x11CE,
         [0xA4, 0x9E, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00],
     );
-
-    co_initialize()?;
-
-    let obj: ComRef<IShellDispatch> = co_create_instance(&CLSID_SH_APP)?;
-
-    obj.file_run()?;
-
-    co_uninitialize();
-
-    Ok(())
 }
 
 #[repr(C)]
@@ -48,11 +53,11 @@ pub struct IShellDispatch {
 #[allow(non_snake_case)]
 pub struct IShellDispatch_vtable {
     pub __IDispatch:      <IDispatch as ComInterface>::VTable,
-    pub Application: extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
-    pub Parent: extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
+    pub Application:      extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
+    pub Parent:           extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
     pub NameSpace:        *mut c_void, // extern "stdcall" fn(*const IShellDispatch, VARIANT, *mut *mut Folder) -> HRESULT,
     pub BrowseForFolder:  *mut c_void, // extern "stdcall" fn(*const IShellDispatch, u32, BSTR, u32, *mut *mut Folder) -> HRESULT,
-    pub Windows: extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
+    pub Windows:          extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
     pub Open:             *mut c_void, // extern "stdcall" fn(*const IShellDispatch, VARIANT) -> HRESULT,
     pub Explore:          *mut c_void, // extern "stdcall" fn(*const IShellDispatch, VARIANT) -> HRESULT,
     pub MinimizeAll:      extern "stdcall" fn(*const IShellDispatch) -> HRESULT,

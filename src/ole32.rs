@@ -6,6 +6,7 @@ use crate::{
         IID,
     },
     ComInterface,
+    ComClass,
     ComRef,
     IUnknown,
 };
@@ -15,37 +16,45 @@ use std::{
     ptr::null_mut,
 };
 
-pub fn co_initialize() -> Result<(), HRESULT> {
-    unsafe {
-        match native::CoInitializeEx(std::ptr::null_mut(), native::COINIT::APARTMENTTHREADED) {
-            HRESULT::S_OK => Ok(()),
-            hr => Err(hr),
+pub struct ComServer;
+
+impl ComServer{
+
+    pub fn initialize() -> Result<ComServer, HRESULT> {
+        unsafe {
+            match native::CoInitializeEx(std::ptr::null_mut(), native::COINIT::APARTMENTTHREADED) {
+                HRESULT::S_OK => Ok(ComServer{}),
+                hr => Err(hr),
+            }
+        }
+    }
+
+    pub fn create_instance<T: ComClass>(&self) -> Result<ComRef<T::ClassInterface>, HRESULT> {
+        unsafe {
+            let ptr: *mut T::ClassInterface = null_mut();
+
+            match native::CoCreateInstance(
+                &T::CLSID,
+                null_mut(),
+                native::CLSCTX::INPROC_SERVER,
+                &T::ClassInterface::IID,
+                transmute(&ptr),
+            ) {
+                HRESULT::S_OK => Ok(ComRef::new(ptr)),
+                hr => Err(hr),
+            }
         }
     }
 }
 
-pub fn co_uninitialize() {
-    unsafe {
-        native::CoUninitialize();
-    }
-}
-
-pub fn co_create_instance<T: ComInterface>(clsid: &CLSID) -> Result<ComRef<T>, HRESULT> {
-    unsafe {
-        let ptr: *mut T = null_mut();
-
-        match native::CoCreateInstance(
-            clsid,
-            null_mut(),
-            native::CLSCTX::INPROC_SERVER,
-            &T::IID,
-            transmute(&ptr),
-        ) {
-            HRESULT::S_OK => Ok(ComRef::new(ptr)),
-            hr => Err(hr),
+impl Drop for ComServer{
+    fn drop(&mut self) {
+        unsafe {
+            native::CoUninitialize();
         }
     }
 }
+
 
 pub mod native {
 
