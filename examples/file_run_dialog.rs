@@ -22,7 +22,7 @@ fn main() -> Result<(), HRESULT> {
 
     let com = ComServer::initialize()?;
 
-    let shell_app = com.create_instance::<SH_APP>()?;
+    let shell_app = com.create_instance::<Shell>()?;
 
     shell_app.file_run()?;
 
@@ -30,18 +30,17 @@ fn main() -> Result<(), HRESULT> {
 }
 
 #[allow(non_camel_case_types)]
-pub struct SH_APP;
+pub struct Shell;
 
-impl ComClass for SH_APP{
-
-    type ClassInterface = IShellDispatch;
-
+impl ComClass for Shell {
     const CLSID: CLSID = CLSID::new(
         0x13709620,
         0xC279,
         0x11CE,
         [0xA4, 0x9E, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00],
     );
+
+    type ClassInterface = IShellDispatch;
 }
 
 #[repr(C)]
@@ -50,7 +49,7 @@ pub struct IShellDispatch {
 }
 
 #[repr(C)]
-#[allow(non_snake_case)]
+#[allow(non_snake_case, non_camel_case_types)]
 pub struct IShellDispatch_vtable {
     pub __IDispatch:      <IDispatch as ComInterface>::VTable,
     pub Application:      extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
@@ -90,14 +89,14 @@ impl IShellDispatch {
 }
 
 impl ComInterface for IShellDispatch {
-    type VTable = IShellDispatch_vtable;
-
     const IID: IID = IID::new(
         0xd8f015c0,
         0xc278,
         0x11ce,
         [0xa4, 0x9e, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00],
     );
+
+    type VTable = IShellDispatch_vtable;
 
     unsafe fn vtable(&self) -> *const Self::VTable {
         self.__vtable
