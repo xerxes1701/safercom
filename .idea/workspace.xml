@@ -9,14 +9,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5654e871-5ad5-42bd-8b4e-77d59a7666a3" name="Default Changelist" comment="added rudimentary ComInterface derive">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/micha.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/idl/Cargo.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/idl/src/lib.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/com_interface.rs" afterDir="false" />
+    <list default="true" id="5654e871-5ad5-42bd-8b4e-77d59a7666a3" name="Default Changelist" comment="added unittest for idl macro">
+      <change beforePath="$PROJECT_DIR$/.idea/cio-rs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cio-rs.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/file_run_dialog.rs" beforeDir="false" afterPath="$PROJECT_DIR$/examples/file_run_dialog.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idl/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/idl/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idl/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/idl/src/lib.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,13 +22,32 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/tests/com_interface.rs">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="187">
+                    <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib.rs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="98" column="15" selection-start-line="98" selection-start-column="15" selection-end-line="98" selection-end-column="15" />
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="e#328#329#0" expanded="true" />
                 <element signature="e#410#411#0" expanded="true" />
@@ -48,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/file_run_dialog.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="94" selection-start-line="94" selection-end-line="94" />
+            <state relative-caret-position="495">
+              <caret line="87" column="5" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -61,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/Cargo.toml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -70,16 +87,28 @@
         <entry file="file://$PROJECT_DIR$/idl/Cargo.toml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/idl/src/lib.rs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/idl/src/lib.rs">
+        <entry file="file://$USER_HOME$/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.24/src/lib.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+            <state relative-caret-position="195">
+              <caret line="163" selection-start-line="163" selection-end-line="163" />
+              <folding>
+                <element signature="e#5414#5415#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -87,7 +116,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.24/src/unstable.rs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="2448">
               <caret line="148" selection-start-line="148" selection-end-line="148" />
             </state>
           </provider>
@@ -103,18 +132,19 @@
       <list>
         <option value="$PROJECT_DIR$/.rustfmt.toml" />
         <option value="$PROJECT_DIR$/src/lib.rs" />
-        <option value="$PROJECT_DIR$/Cargo.toml" />
-        <option value="$PROJECT_DIR$/idl/Cargo.toml" />
         <option value="$PROJECT_DIR$/idl/tests/foo.rs" />
-        <option value="$PROJECT_DIR$/idl/src/lib.rs" />
         <option value="$PROJECT_DIR$/tests/foo.rs" />
         <option value="$PROJECT_DIR$/examples/file_run_dialog.rs" />
+        <option value="$PROJECT_DIR$/Cargo.toml" />
+        <option value="$PROJECT_DIR$/idl/Cargo.toml" />
+        <option value="$PROJECT_DIR$/tests/com_interface.rs" />
+        <option value="$PROJECT_DIR$/idl/src/lib.rs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="758" />
-    <option name="width" value="1169" />
+    <option name="x" value="848" />
+    <option name="width" value="1079" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -122,6 +152,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -154,8 +186,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -184,10 +214,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Cargo Command.Run file_run_dialog">
+  <component name="RunManager" selected="Cargo Command.Test test">
     <configuration name="Run file_run_dialog" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="run --package safercom --example file_run_dialog" />
+      <option name="allFeatures" value="false" />
+      <option name="nocapture" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test it_works (1)" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test --package safercom --test com_interface it_works -- --exact" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="backtrace" value="SHORT" />
@@ -205,9 +245,9 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="Test lib::tests" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+    <configuration name="Test test" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="test --package idl --lib tests" />
+      <option name="command" value="test --package idl --lib test -- --exact" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="backtrace" value="SHORT" />
@@ -227,10 +267,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cargo Command.Test it_works (1)" />
+        <item itemvalue="Cargo Command.Run file_run_dialog" />
         <item itemvalue="Cargo Command.Test it_works" />
         <item itemvalue="Cargo Command.Test tests::it_works" />
-        <item itemvalue="Cargo Command.Test lib::tests" />
-        <item itemvalue="Cargo Command.Run file_run_dialog" />
       </list>
     </recent_temporary>
   </component>
@@ -246,24 +286,63 @@
       <updated>1546100085621</updated>
       <workItem from="1546100087384" duration="349000" />
     </task>
+    <task id="LOCAL-00001" summary="added rudimentary ComInterface derive">
+      <created>1546791253152</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1546791253152</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added rudimentary ComInterface derive">
+      <created>1546791277099</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1546791277099</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_tests__it_works - 2019.01.06 at 16h 38m 26s.xml">
-      <configuration name="Test tests::it_works" configurationId="CargoCommandRunConfiguration" />
+    <history-entry file="Test_test - 2019.01.07 at 21h 40m 35s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_it_works - 2019.01.06 at 16h 48m 37s.xml">
-      <configuration name="Test it_works" configurationId="CargoCommandRunConfiguration" />
+    <history-entry file="Test_it_works_(1) - 2019.01.07 at 21h 40m 40s.xml">
+      <configuration name="Test it_works (1)" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 44m 46s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 45m 01s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 47m 55s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 48m 03s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 48m 19s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 48m 56s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 52m 56s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_test - 2019.01.07 at 21h 53m 01s.xml">
+      <configuration name="Test test" configurationId="CargoCommandRunConfiguration" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="349000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="758" y="0" width="1169" height="1047" extended-state="0" />
+    <frame x="848" y="0" width="1079" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22993688" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2551521" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
@@ -276,9 +355,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Inspection Results" order="9" visible="true" weight="0.32932165" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32932165" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32932165" />
+      <window_info anchor="bottom" id="Inspection Results" order="9" weight="0.32932165" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32932165" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -293,11 +372,24 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added rudimentary ComInterface derive" />
-    <option name="LAST_COMMIT_MESSAGE" value="added rudimentary ComInterface derive" />
+    <MESSAGE value="added unit test for idl macro" />
+    <MESSAGE value="added unittest for idl macro" />
+    <option name="LAST_COMMIT_MESSAGE" value="added unittest for idl macro" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tests/foo.rs" />
     <entry file="file://$PROJECT_DIR$/.rustfmt.toml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -305,31 +397,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.24/src/unstable.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2448">
+          <caret line="148" selection-start-line="148" selection-end-line="148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/file_run_dialog.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="87" column="5" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.24/src/lib.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="163" selection-start-line="163" selection-end-line="163" />
+          <folding>
+            <element signature="e#5414#5415#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Cargo.toml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/idl/Cargo.toml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.24/src/unstable.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="148" selection-start-line="148" selection-end-line="148" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib.rs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="98" column="15" selection-start-line="98" selection-start-column="15" selection-end-line="98" selection-end-column="15" />
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="e#328#329#0" expanded="true" />
             <element signature="e#410#411#0" expanded="true" />
@@ -337,24 +439,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/foo.rs">
+    <entry file="file://$PROJECT_DIR$/idl/Cargo.toml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="170">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com_interface.rs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/idl/src/lib.rs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/file_run_dialog.rs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
+        <state relative-caret-position="136">
+          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
         </state>
       </provider>
     </entry>

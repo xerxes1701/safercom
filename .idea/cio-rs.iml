@@ -6,6 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/idl/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/idl/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/idl/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/idl/benches" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/idl/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
