@@ -10,4 +10,3 @@ struct Foo;
 
 #[allow(non_camel_case_types)]
 struct Foo_VTable;
-
