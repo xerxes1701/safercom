@@ -1,5 +1,7 @@
 extern crate safercom;
+extern crate idl;
 
+use idl::{com_interface};
 use safercom::{
     ole32::{
         ComServer,
@@ -43,14 +45,13 @@ impl ComClass for Shell {
     type ClassInterface = IShellDispatch;
 }
 
+#[com_interface(iid = "0xd8f015c0-c278-11ce-a49e-444553540000")]
 #[repr(C)]
-pub struct IShellDispatch {
-    pub __vtable: *mut IShellDispatch_vtable,
-}
+pub struct IShellDispatch;
 
 #[repr(C)]
 #[allow(non_snake_case, non_camel_case_types)]
-pub struct IShellDispatch_vtable {
+pub struct IShellDispatch_VTable {
     pub __IDispatch:      <IDispatch as ComInterface>::VTable,
     pub Application:      extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
     pub Parent:           extern "stdcall" fn(*const IShellDispatch, *mut *mut IDispatch) -> HRESULT,
@@ -80,25 +81,10 @@ pub struct IShellDispatch_vtable {
 impl IShellDispatch {
     pub fn file_run(&self) -> Result<(), HRESULT> {
         unsafe {
-            match ((*self.__vtable).FileRun)(transmute(self)) {
+            match ((*self.vtable).FileRun)(transmute(self)) {
                 HRESULT::S_OK => Ok(()),
                 hr => Err(hr),
             }
         }
-    }
-}
-
-impl ComInterface for IShellDispatch {
-    const IID: IID = IID::new(
-        0xd8f015c0,
-        0xc278,
-        0x11ce,
-        [0xa4, 0x9e, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00],
-    );
-
-    type VTable = IShellDispatch_vtable;
-
-    unsafe fn vtable(&self) -> *const Self::VTable {
-        self.__vtable
     }
 }

@@ -9,11 +9,10 @@ use std::{
     ops::Deref,
     os::raw::c_void,
 };
+use idl::com_interface;
 
-#[repr(C)]
-pub struct IUnknown {
-    vtable: *const IUnknownVTable,
-}
+#[com_interface(iid = "00000000-0000-0000-0000-000000000046")]
+pub struct IUnknown;
 
 impl IUnknown {
     pub unsafe fn query_interface(
@@ -34,50 +33,25 @@ impl IUnknown {
 }
 
 #[repr(C)]
-pub struct IUnknownVTable {
+pub struct IUnknown_VTable {
     pub query_interface: extern "stdcall" fn(*const IUnknown, &IID, *mut *mut c_void) -> HRESULT,
     pub add_ref:         extern "stdcall" fn(*const IUnknown) -> u32,
     pub release:         extern "stdcall" fn(*const IUnknown) -> u32,
 }
 
-impl ComInterface for IUnknown {
-    const IID: IID = IID::new(0x00000000, 0x0000, 0x0000, [0, 0, 0, 0, 0, 0, 0, 0x46]);
 
-    type VTable = IUnknownVTable;
 
-    unsafe fn vtable(&self) -> *const Self::VTable {
-        self.vtable
-    }
-}
-
-#[repr(C)]
-pub struct IDispatch {
-    __vtable: *mut IDispatch_vtable,
-}
+#[com_interface(iid="00020400-0000-0000-c000-000000000046")]
+pub struct IDispatch;
 
 #[allow(non_snake_case)]
 #[repr(C)]
-pub struct IDispatch_vtable {
+pub struct IDispatch_VTable {
     __iunknown:       <IUnknown as ComInterface>::VTable,
     GetTypeInfoCount: *mut c_void, //extern "stdcall" fn(ComPtr, *mut u32) -> HRESULT,
     GetTypeInfo:      *mut c_void, //extern "stdcall" fn(ComPtr, u32, LCID, *mut *mut ITypeInfo) -> HRESULT,
     GetIDsOfNames:    *mut c_void, //extern "stdcall" fn(ComPtr, REFIID, *mut BSTR, u32, LCID, *mut DISPID) -> HRESULT,
     Invoke:           *mut c_void, //extern "stdcall" fn(ComPtr, DISPID, REFIID, LCID, WORD, *mut DISPPARAMS, *mut VARIANT, *mut EXCEPINFO, *mut u32) -> HRESULT,
-}
-
-impl ComInterface for IDispatch {
-    type VTable = IDispatch_vtable;
-
-    const IID: IID = IID::new(
-        0x00020400,
-        0x0000,
-        0x0000,
-        [0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46],
-    );
-
-    unsafe fn vtable(&self) -> *const Self::VTable {
-        self.__vtable
-    }
 }
 
 pub mod types {
@@ -96,21 +70,11 @@ pub mod types {
 
     #[derive(Clone, Debug, PartialEq, Eq)]
     #[repr(transparent)]
-    pub struct IID(pub GUID);
+    pub struct IID([u8;16]);
 
     impl IID {
-        pub const fn new(
-            data1: u32,
-            data2: u16,
-            data3: u16,
-            data4: [u8; 8],
-        ) -> IID {
-            IID(GUID {
-                data1,
-                data2,
-                data3,
-                data4,
-            })
+        pub const fn new(data: [u8; 16]) -> IID {
+            IID(data)
         }
     }
 
