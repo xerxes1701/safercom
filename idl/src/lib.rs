@@ -99,14 +99,13 @@ fn parse_guid_parts(text: &str) -> Result<[u8;16], &'static str> {
     let data4 = u16::from_str_radix(&captures[4], 16).unwrap();
     let data5 = u64::from_str_radix(&captures[5], 16).unwrap();
 
-    use byteorder::{ByteOrder, BigEndian, LittleEndian};
-
     let mut data = [0u8; 16];
-    LittleEndian::write_u32(&mut data[0..4], data1);
-    LittleEndian::write_u16(&mut data[4..6], data2);
-    LittleEndian::write_u16(&mut data[6..8], data3);
-    BigEndian::write_u64(&mut data[8..16], data5); //writes 0s onto index 8 and 9; to be overridden by data4
-    BigEndian::write_u16(&mut data[8..10], data4);
+   
+    data[0..4].clone_from_slice(&data1.to_le_bytes());
+    data[4..6].clone_from_slice(&data2.to_le_bytes());
+    data[6..8].clone_from_slice(&data3.to_le_bytes());
+    data[8..10].clone_from_slice(&data4.to_be_bytes());
+    data[10..16].clone_from_slice(&data5.to_be_bytes()[2..8]);
 
     Ok(data)
 }

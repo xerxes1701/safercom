@@ -1,6 +1,6 @@
 pub mod ole32;
 
-use crate::types::{
+use types::{
     HRESULT,
     IID,
     CLSID,
