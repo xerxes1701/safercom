@@ -41,6 +41,8 @@ fn com_interface_impl(
 
     let iid = get_iid(&attr).unwrap();
 
+    let root = get_path_root(&attr);
+
     let gen = quote! {
 
         #[repr(C)]
@@ -48,10 +50,10 @@ fn com_interface_impl(
             vtable: *const #vtable_name
         }
 
-        impl ComInterface for #struct_name {
+        impl #root::ComInterface for #struct_name {
             type VTable = #vtable_name;
 
-            const IID: IID = IID::new( #iid );
+            const IID: #root::types::IID = #root::types::IID::new( #iid );
 
             unsafe fn vtable(&self) -> *const Self::VTable {
                 self.vtable
@@ -62,11 +64,26 @@ fn com_interface_impl(
     gen
 }
 
+/// Search the given attribute list for an name-value-pair in the form of
+/// `iid = "..."` where the string is a valid guid.
+/// returns an array representing the guid's bytes in windows endianess.
 fn get_iid(args: &AttributeArgs) -> Result<proc_macro2::TokenStream, &'static str> {
     let attr = find_attr_value_by_name(args, "iid").ok_or("No IID parameter")?;
     to_guid_byte_array(attr)
 }
 
+/// Determines the root for absulute paths.
+/// Returns `crate` if the identifier `internal` is present in the argument list,
+/// else returns `::safercom`
+fn get_path_root(args: &AttributeArgs) -> proc_macro2::TokenStream {
+    if find_attr_word_by_name(args, "internal") {
+        quote!{ crate }
+    } else {
+        quote!{ ::safercom }
+    }
+}
+
+/// Looks for a single identifier in the argument list `args` with the given `name`
 fn find_attr_value_by_name<'a>(args: &'a AttributeArgs, name: &str) -> Option<&'a Lit> {
     for meta in args {
         if let NestedMeta::Meta(Meta::NameValue(MetaNameValue { ident, lit, .. })) = meta {
@@ -78,6 +95,23 @@ fn find_attr_value_by_name<'a>(args: &'a AttributeArgs, name: &str) -> Option<&'
     return None;
 }
 
+/// Looks for a name-value-pair in the argument list `args` with the given `name`
+fn find_attr_word_by_name<'a>(args: &'a AttributeArgs, name: &str) -> bool {
+    for meta in args{
+        if let NestedMeta::Meta(Meta::Word(ident)) = meta {
+            if format!("{}", ident) == name {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/// Parses a GUID-String from the given literal.
+/// The literal muss be a String.
+/// the guid must be parsable by `parse_guid_parts`.
+/// Returns a token stream of an array containing the guid's bytes
+/// in windows endianess.
 fn to_guid_byte_array(attr: &Lit) -> Result<proc_macro2::TokenStream, &'static str> {
     if let Lit::Str(value) = attr {
         let guid = parse_guid_parts(&value.value())?;
@@ -88,6 +122,11 @@ fn to_guid_byte_array(attr: &Lit) -> Result<proc_macro2::TokenStream, &'static s
     }
 }
 
+/// Parses a GUID from the given string.
+/// The String must have the format `"8-4-4-4-12"` where each number N represents
+/// a hex-number with N digits.
+/// Returns an array containing the guid's bytes in windows endianess,
+/// where the first 3 numbers are represented in little endianes and the last two in big endianes.
 fn parse_guid_parts(text: &str) -> Result<[u8;16], &'static str> {
     let re = regex::Regex::new("([[:xdigit:]]{8})-([[:xdigit:]]{4})-([[:xdigit:]]{4})-([[:xdigit:]]{4})-([[:xdigit:]]{12})").unwrap();
     let captures = re.captures(text).ok_or("GUID format '8-4-4-4-12' expected. eg.: '00112233-4455-6677-8899-aabbccddeeff'")?;
@@ -167,7 +206,8 @@ mod test {
         let actual = com_interface_impl(attr, item);
 
         let expected = quote::quote! {
-            struct Foo {
+            # [ repr ( C ) ] 
+            pub struct Foo {
                 vtable: *const Foo_VTable
             }
 

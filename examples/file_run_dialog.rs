@@ -8,8 +8,7 @@ use safercom::{
     },
     types::{
         CLSID,
-        HRESULT,
-        IID,
+        HRESULT
     },
     ComInterface,
     ComClass,
