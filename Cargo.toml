@@ -8,3 +8,6 @@ edition = "2018"
 
 [dependencies]
 idl = {path="./idl"}
+
+[[example]]
+name = "file_run_dialog"

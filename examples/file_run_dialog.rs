@@ -1,6 +1,3 @@
-extern crate safercom;
-extern crate idl;
-
 use idl::{com_interface};
 use safercom::{
     ole32::{
