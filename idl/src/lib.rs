@@ -41,8 +41,6 @@ fn com_interface_impl(
 
     let iid = get_iid(&attr).unwrap();
 
-    let root = get_path_root(&attr);
-
     let gen = quote! {
 
         #[repr(C)]
@@ -50,10 +48,10 @@ fn com_interface_impl(
             vtable: *const #vtable_name
         }
 
-        impl #root::ComInterface for #struct_name {
+        impl safercom::ComInterface for #struct_name {
             type VTable = #vtable_name;
 
-            const IID: #root::types::IID = #root::types::IID::new( #iid );
+            const IID: safercom::types::IID = safercom::types::IID::new( #iid );
 
             unsafe fn vtable(&self) -> *const Self::VTable {
                 self.vtable
@@ -72,17 +70,6 @@ fn get_iid(args: &AttributeArgs) -> Result<proc_macro2::TokenStream, &'static st
     to_guid_byte_array(attr)
 }
 
-/// Determines the root for absulute paths.
-/// Returns `crate` if the identifier `internal` is present in the argument list,
-/// else returns `::safercom`
-fn get_path_root(args: &AttributeArgs) -> proc_macro2::TokenStream {
-    if find_attr_word_by_name(args, "internal") {
-        quote!{ crate }
-    } else {
-        quote!{ ::safercom }
-    }
-}
-
 /// Looks for a single identifier in the argument list `args` with the given `name`
 fn find_attr_value_by_name<'a>(args: &'a AttributeArgs, name: &str) -> Option<&'a Lit> {
     for meta in args {
@@ -93,18 +80,6 @@ fn find_attr_value_by_name<'a>(args: &'a AttributeArgs, name: &str) -> Option<&'
         }
     }
     return None;
-}
-
-/// Looks for a name-value-pair in the argument list `args` with the given `name`
-fn find_attr_word_by_name<'a>(args: &'a AttributeArgs, name: &str) -> bool {
-    for meta in args{
-        if let NestedMeta::Meta(Meta::Word(ident)) = meta {
-            if format!("{}", ident) == name {
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 /// Parses a GUID-String from the given literal.

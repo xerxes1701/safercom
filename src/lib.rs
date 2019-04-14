@@ -1,3 +1,5 @@
+extern crate self as safercom;
+
 pub mod ole32;
 
 use types::{
@@ -11,7 +13,7 @@ use std::{
 };
 use idl::com_interface;
 
-#[com_interface(internal, iid = "00000000-0000-0000-0000-000000000046")]
+#[com_interface(iid = "00000000-0000-0000-0000-000000000046")]
 pub struct IUnknown;
 
 impl IUnknown {
@@ -41,7 +43,7 @@ pub struct IUnknown_VTable {
 
 
 
-#[com_interface(internal, iid="00020400-0000-0000-c000-000000000046")]
+#[com_interface(iid="00020400-0000-0000-c000-000000000046")]
 pub struct IDispatch;
 
 #[allow(non_snake_case)]
